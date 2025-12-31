@@ -1,10 +1,37 @@
+import NotesVector from '../assets/NotesVector.jpg'
+import CardSlider from '../components/CardSlider'
+
 const Home = () => {
   
   return (
-    <div className='min-h-full border-2 border-blue-200'>
-      <section className='w-full min-h-[40vh] flex items-center justify-center border-2 border-green-200'>
-        
+    <div className='min-h-full'>
+    
+      <section className='w-full h-[80vh] md:h-[90vh] max-sm:flex-col-reverse flex items-center justify-evenly'>
+        <div>
+          <h1 className='text-[min(10vw,70px)] tracking-wide md:leading-15 leading-12 font-bold '>Welcome to <br/><span className='text-(--primary-color) tracking-tight'>notesNook</span></h1>    
+          <p className='mt-4 md:text-2xl'>Your personal space to organize and manage your notes efficiently.</p>
+          <div className='flex flex-row gap-x-6 mt-6 text-2xl max-sm:text-lg'>
+            <button className='btn-primary'>
+              Sign Up
+            </button>
+            <button className='btn-secondary'>
+              Log In
+            </button>
+          </div>
+        </div>
+        <div className='md:max-w-[30%] max-sm:w-[50%] md:rounded-[30px] rounded-full overflow-hidden '>
+          <img src={NotesVector} alt="Notes Illustration" className='w-full h-full object-contain'/>
+        </div>
       </section>
+
+
+      <section className='w-full h-[80vh] md:h-[90vh] flex flex-col gap-10 items-center justify-center text-center'> 
+        <h1 className='text-[min(10vw,52px)] tracking-tight md:leading-13 leading-10 font-bold lg:mb-10 lg:-mt-20'>Make the most of your <span className='text-(--primary-color)'>ideas</span> - <br/>and your <span className='text-(--secondary-color)'>time</span></h1>
+        <p className='mt-4 md:text-xl lg:mb-20'>Capture everything important and access it from anywhere, whenever you want.</p>
+        <CardSlider/>
+      </section>
+      
+
     </div>
   )
 }

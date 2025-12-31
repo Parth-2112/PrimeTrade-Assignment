@@ -2,6 +2,8 @@ import {useContext} from 'react'
 import { ThemeContext } from '../context/ThemeContext';
 import { LuSun, LuMoon } from "react-icons/lu";
 import { FaUserCircle } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+import { TbNotebook } from "react-icons/tb";
 
 const Header = () => {
 
@@ -9,25 +11,38 @@ const Header = () => {
 
   return (
 
-    <div className='md:grid md:grid-cols-3 w-full border-2 border-amber-100 items-center'>
-      
-      <div className='border-2 font-bold text-xl'>
-        notes<span className='text-(--secondary-color)'>Nook</span>
+    <div className='flex justify-between md:grid md:grid-cols-3 w-full h-20  items-center'>
+
+
+      <div className=' font-medium text-2xl flex items-center'>
+        <Link to="/">
+          <TbNotebook className='inline text-2xl text-(--secondary-color)'/>
+          notes<span className='text-(--secondary-color)'>Nook</span>
+        </Link>
       </div>
       
-      <div className='flex items-center '>
-        DashBoard
+      <div className='md:flex items-center hidden'>
+        MyTasks
+        About
+        Contact Us
       </div>
       
-      <div className='justify-end flex'>
+      <div className='justify-end flex gap-x-3 max-sm:gap-x-1'>
+
         <div className='w-10 h-10 rounded-full items-center justify-center flex'>
-          <FaUserCircle className='hover:cursor-pointer'/>
+          <Link to="/profile">
+          <FaUserCircle className='hover:cursor-pointer text-2xl text-(--primary-color) dark:text-(--secondary-color)'/>
+          </Link>
         </div>
 
+        <div className='max-sm:block hidden'>
+          div
+        </div>
+        
         <div className="w-10 h-10 rounded-full">
           <button
             onClick={toggleTheme}
-            className="w-full h-full flex items-center justify-center rounded-full hover:cursor-pointer"
+            className="w-full h-full flex items-center text-2xl justify-center rounded-full hover:cursor-pointer"
           >
             {theme === "dark" ? (
               <LuSun className=" text-(--primary-color)" />
