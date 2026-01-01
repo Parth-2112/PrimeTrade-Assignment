@@ -1,5 +1,6 @@
 import {useState, useContext} from 'react'
 import { ThemeContext } from '../context/ThemeContext';
+import { AuthContext } from "../context/AuthContext";
 import { LuSun, LuMoon } from "react-icons/lu";
 import { FaUserCircle, FaSearch } from "react-icons/fa";
 import { Link } from 'react-router-dom';
@@ -7,8 +8,10 @@ import { TbNotebook } from "react-icons/tb";
 import { HiMenuAlt3 } from "react-icons/hi";
 import MobileMenu from "./MobileMenu";
 
+
 const Header = () => {
 
+  const {isAuthenticated, setIsAuthenticated, logout, loading} = useContext(AuthContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const [menuOpen, setMenuOpen] = useState(false);
   
@@ -32,9 +35,9 @@ const Header = () => {
 
       {/* This Div contains user profile icon, theme toggle button and mobile menu button */}
       <div className='justify-end flex gap-x-2 max-sm:gap-x-1'> 
-        <div className='w-10 h-10 rounded-full items-center justify-center flex'>
+        {/* <div className='w-10 h-10 rounded-full items-center justify-center flex'>
           <FaSearch className='hover:cursor-pointer text-xl '/>
-        </div>
+        </div> */}
 
         <div className='w-10 h-10 rounded-full items-center justify-center flex'>
           <Link to="/profile">
@@ -54,7 +57,19 @@ const Header = () => {
             )}
           </button>
         </div>
-          
+        
+        {
+          isAuthenticated?
+            <button
+              disabled={loading} 
+              className={`btn-primary hidden md:flex py-0 ${loading ? "opacity-60 cursor-not-allowed" : "cursor-pointer"}`}
+              onClick={logout}
+            >
+              Log Out
+            </button> : 
+            <Link to="/login" className='btn-primary cursor-pointer hidden md:flex py-0'>Log In</Link>
+        }
+
         <div className="md:hidden w-10 h-10">
           <button onClick={() => setMenuOpen(true)} className='w-full h-full flex items-center text-2xl justify-center cursor-pointer'>
             <HiMenuAlt3 className="text-3xl" />
