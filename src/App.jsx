@@ -10,6 +10,8 @@ import Profile from "./pages/Profile";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 
+
+
 function App() {
 
   return (
@@ -20,7 +22,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<LogIn />} />
+        <Route path="/login" element={ <LogIn />} />
 
         <Route 
           path="/profile" 

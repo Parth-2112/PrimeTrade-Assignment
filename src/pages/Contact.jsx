@@ -38,7 +38,7 @@ const Contact = () => {
             className="w-full p-4 pl-12 rounded-md focus:outline-none focus:ring-2 focus:ring-(--primary-color)"
           />
         </div>
-        <button className='btn-primary w-1/4 mx-auto mt-4' onClick={()=>SubmitEvent()}>Submit</button>
+        <button className='btn-primary w-1/4 mx-auto mt-4'>Submit</button>
       </div>
     
     </div>

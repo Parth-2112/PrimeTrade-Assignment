@@ -9,7 +9,7 @@ import { server } from "../main";
 
 const LogIn = () => {
 
-  const {isAuthenticated, setIsAuthenticated, loading, setLoading} = useContext(AuthContext);
+  const {isAuthenticated, setIsAuthenticated, loading, setLoading, setUser} = useContext(AuthContext);
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
 
@@ -32,6 +32,7 @@ const LogIn = () => {
       toast.success(data.message);
       toast.success("logged In");
       setIsAuthenticated(true);
+      await axios.get(`${server}/users/me`, { withCredentials: true }).then(res => {setUser(res.data.user);})
       setLoading(false);
     } catch (error) {
       toast.error(error.response.data.message);

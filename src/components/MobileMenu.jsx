@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import { HiX } from "react-icons/hi";
-
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const MobileMenu = ({ isOpen, onClose }) => {
+  
+  const{isAuthenticated, logout} = useContext(AuthContext);
+  
   return (
     <>
       {/* Overlay */}
@@ -46,14 +50,21 @@ const MobileMenu = ({ isOpen, onClose }) => {
           </nav>
         </div>
 
-        <div className="p-4 my-8 flex items-center justify-evenly rounded-lg text-center">
-          <button className="btn-primary w-24">
-            Sign Up 
-          </button>
-          <button className="btn-secondary w-24">
-            Log In
-          </button>  
-        </div>    
+        {
+          !isAuthenticated?
+          <div className="p-4 my-8 flex items-center justify-evenly rounded-lg text-center">
+            <Link onClick={onClose} to="/signup" className="btn-primary w-24">
+              Sign Up 
+            </Link>
+            <Link onClick={onClose} to="login" className="btn-secondary w-24">
+              Log In
+            </Link>  
+          </div>    
+          :
+          <div className="p-4 my-8 flex items-center justify-center rounded-lg text-center">
+           <button className="btn-primary w-24" onClick={()=>{logout();onClose();}} >Log Out</button>
+          </div>
+        }  
       
       </div>
     </>
