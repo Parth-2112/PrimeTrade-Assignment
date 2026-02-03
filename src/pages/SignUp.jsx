@@ -52,12 +52,6 @@ const SignUp = () => {
     }  
   }
   
-  useEffect(() => {
-    if (isAuthenticated) {
-    toast.success("You are already logged in");
-    }
-  }, [isAuthenticated]);
-  
   if(isAuthenticated){  
     return <Navigate to="/" replace/>
   }

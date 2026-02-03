@@ -1,9 +1,18 @@
 import NotesVector from '../assets/NotesVector.jpg'
 import CardSlider from '../components/CardSlider'
 import { Link } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import { AuthContext } from '../context/AuthContext'
+import { useContext } from 'react'
 
 const Home = () => {
   
+  const {isAuthenticated} = useContext(AuthContext);
+  const onClickHandler = () => {
+    if(isAuthenticated){
+      toast.success("You are already logged in");
+    }
+  }
   return (
     <div className='min-h-full'>
     
@@ -13,12 +22,12 @@ const Home = () => {
           <p className='mt-4 md:text-2xl'>Your personal space to organize and manage your notes efficiently.</p>
           <div className='flex flex-row gap-x-6 mt-6 text-2xl max-sm:text-lg'>
             <Link to="/signup">
-              <button className='btn-primary'>
+              <button className='btn-primary' onClick={onClickHandler}>
                 Sign Up
               </button>
             </Link>
             <Link to="/login">
-              <button className='btn-secondary'>
+              <button className='btn-secondary' onClick={onClickHandler}>
                 Log In
               </button>
             </Link>
