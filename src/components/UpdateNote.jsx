@@ -4,6 +4,7 @@ import { server } from "../main";
 import { TbFileDescription } from "react-icons/tb";
 import { MdOutlineTitle } from "react-icons/md";
 import toast from "react-hot-toast";
+import { createPortal } from "react-dom";
 
 const UpdateNote = ({ onClose , id, setRefresh}) => {
   const [title, setTitle] = useState("");
@@ -35,7 +36,7 @@ const UpdateNote = ({ onClose , id, setRefresh}) => {
     }
   };
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
       onClick={onClose}
@@ -77,7 +78,8 @@ const UpdateNote = ({ onClose , id, setRefresh}) => {
           {loading ? "Updating..." : "Update Note"}
         </button>
       </form>
-    </div>
+    </div>,
+    document.getElementById("modal-root")
   );
 };
 
