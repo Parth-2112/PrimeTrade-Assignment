@@ -3,7 +3,8 @@ import {
   newNote,
   getMyNotes, 
   updateNote,
-  deleteNote
+  deleteNote,
+  getOneNote
 } from "../controllers/note.js";
 import { isAuthenticated } from '../middlewares/auth.js';
 
@@ -13,6 +14,7 @@ router.post("/new",isAuthenticated, newNote);
 router.get("/my",isAuthenticated, getMyNotes);
 
 router.route("/:id")
+  .get(isAuthenticated, getOneNote)
   .put(isAuthenticated, updateNote)
   .delete(isAuthenticated, deleteNote);
 
