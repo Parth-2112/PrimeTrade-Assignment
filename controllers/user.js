@@ -5,7 +5,8 @@ import ErrorHandler from "../middlewares/error.js";
 
 export const loginUser = async(req,res,next)=>{
   try {
-    const {email, password} = req.body;
+    let {email, password} = req.body;
+    email = email.toLowerCase();
 
     let user =  await User.findOne({email}).select("+password");
     if(!user) return next(new Error("Invalid Email or Password",404));
@@ -23,7 +24,8 @@ export const loginUser = async(req,res,next)=>{
 
 export const createNewUser = async(req,res,next)=>{
   try {
-    const{name, email, password} = req.body;
+    let{name, email, password} = req.body;
+    email = email.toLowerCase();
     let user = await User.findOne({email});
 
     if(user) return next(new Error("user Already Exists",404));
@@ -64,53 +66,29 @@ export const logoutUser = (req,res)=>{
 
 
 
-// export const updateUser = async(req,res,next)=>{
-//   try {
-//     const{name} = req.body;
-//     let user = await User.findOne({email});
-
-//     if(!user) return next(new ErrorHandler("User Not Found",404));
-    
-//     user.name = name;
-
-//     await user.save();
-//     res.status(200).json({
-//       success:true,
-//       message: "Profile Updated Successfully",
-//     });
-//   } catch (error) {
-//       next(error);
-//   }
-// }
-
 export const updateUser = async (req, res, next) => {
   try {
-    const { name, email } = req.body;
-    // Current logged-in user (from isAuthenticated middleware)
+    let { name, email } = req.body;
+    email = email.toLowerCase();
     const user = await User.findById(req.user._id);
 
     if (!user) {
       return next(new ErrorHandler("User not found", 404));
     }
 
-    // If email is being changed
     if (email && email !== user.email) {
       const emailExists = await User.findOne({ email });
-
       if (emailExists) {
         return next(new ErrorHandler("Email already in use", 400));
       }
-
       user.email = email;
     }
 
-    // Update name if provided
     if (name) {
       user.name = name;
     }
 
     await user.save();
-
     res.status(200).json({
       success: true,
       message: "Profile updated successfully",
@@ -121,5 +99,3 @@ export const updateUser = async (req, res, next) => {
     next(error);
   }
 };
-
-export const deleteUser = async(req,res)=>{}
