@@ -1,6 +1,7 @@
 import { User } from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import { sendCookie } from "../utils/features.js";
+import ErrorHandler from "../middlewares/error.js";
 
 export const loginUser = async(req,res,next)=>{
   try {
@@ -47,7 +48,7 @@ export const getMyProfile = (req,res)=>{
 
 
 
-export const logoutUser = (req, res)=>{
+export const logoutUser = (req,res)=>{
   res
     .status(200)
     .cookie("token","",{
@@ -63,6 +64,62 @@ export const logoutUser = (req, res)=>{
 
 
 
-export const updateUser = async(req,res)=>{}
+// export const updateUser = async(req,res,next)=>{
+//   try {
+//     const{name} = req.body;
+//     let user = await User.findOne({email});
+
+//     if(!user) return next(new ErrorHandler("User Not Found",404));
+    
+//     user.name = name;
+
+//     await user.save();
+//     res.status(200).json({
+//       success:true,
+//       message: "Profile Updated Successfully",
+//     });
+//   } catch (error) {
+//       next(error);
+//   }
+// }
+
+export const updateUser = async (req, res, next) => {
+  try {
+    const { name, email } = req.body;
+    // Current logged-in user (from isAuthenticated middleware)
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return next(new ErrorHandler("User not found", 404));
+    }
+
+    // If email is being changed
+    if (email && email !== user.email) {
+      const emailExists = await User.findOne({ email });
+
+      if (emailExists) {
+        return next(new ErrorHandler("Email already in use", 400));
+      }
+
+      user.email = email;
+    }
+
+    // Update name if provided
+    if (name) {
+      user.name = name;
+    }
+
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+      user,
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const deleteUser = async(req,res)=>{}
