@@ -5,7 +5,7 @@ import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <div className="w-full items-center justify-center flex-col min-h-20 mt-10">
+    <div className=" w-full items-center justify-center flex-col mt-10">
       <div className="flex-col justify-center items-center w-full mb-4 text-center">
         <h3 className="flex justify-center items-center mb-4 text-xl font-medium"><span className="text-(--secondary-color) mr-2">Follow</span> Us On</h3>
         <a href="https://www.facebook.com/">

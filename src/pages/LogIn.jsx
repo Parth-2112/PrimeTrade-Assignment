@@ -79,7 +79,7 @@ const LogIn = () => {
             className="w-full p-4 pl-12 rounded-md focus:outline-none focus:ring-2 focus:ring-(--primary-color)"
           />
         </div>
-        <button disabled={loading} type="submit" className={`btn-primary w-1/4 mx-auto md:mt-4 ${loading ? "opacity-60 cursor-not-allowed" : "cursor-pointer"}`}>Log In</button>
+        <button disabled={loading} type="submit" className={`btn-primary md:w-1/4 mx-auto md:mt-4 ${loading ? "opacity-60 cursor-not-allowed" : "cursor-pointer"}`}>Log In</button>
 
         <div className="flex w-full justify-end items-center">
           Don't have an account? <span className="ml-2 text-(--primary-color) hover:text-(--secondary-color)"><Link to="/signup"> Sign Up</Link></span>

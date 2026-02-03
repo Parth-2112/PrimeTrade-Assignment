@@ -15,8 +15,9 @@ import ProtectedRoutes from "./utils/ProtectedRoutes";
 function App() {
 
   return (
-    <div className="bg-light w-full min-h-screen p-4 lg:px-20 lg:py-4 text-dark dark:bg-dark font-primary dark:text-light">
+    <div className="bg-light w-full min-h-screen flex flex-col p-4 lg:px-20 lg:py-4 text-dark dark:bg-dark font-primary dark:text-light">
       <Header/>
+      <main className="grow">
       <Routes>
         
         <Route path="/" element={<Home />} />
@@ -43,6 +44,7 @@ function App() {
       
       </Routes>
       <Toaster/>
+      </main>
       <Footer/>
     </div>
   );
