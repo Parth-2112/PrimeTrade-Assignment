@@ -1,21 +1,56 @@
 # PrimeTrade-Assignment
 Contains both frontend and backend for the primeTrade assignment 
 
-FRONTEND TECH STACK- 
-React Tailwind CSS 
+Tech Stack
 
-BACKEND TECH STACK-
-Node Express MongoDb 
+FRONTEND
+React (Vite)
+Tailwind CSS
+Axios
+React Router
+React Hot Toast
 
-Create config.env in the data folder in backend and create following variables 
-Create JWT_SECRET
-Add your database MONGO_URI
-Create NODE_ENV (production or development)
-Add PORT 4000 
+BACKEND
+Node.js
+Express.js
+MongoDB (Mongoose)
+JWT Authentication (HTTP-only cookies)
+bcrypt
 
-To run the FronEnd Use npm run dev
-To run the BackEnd use npm start to start the server 
+OTHER
+REST API
+Cookie-based auth
+CORS
 
-After starting the backend it will run on port 4000, you can test the api's on postman 
+Setup - 
+Clone the repository 
+git clone https://github.com/Parth-2112/PrimeTrade-Assignment.git
+cd PrimeTrade-Assignment
 
+BackEnd Setup - Create config.env file in data folder in backend  
+
+PORT=4000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+FRONTEND_URL=http://localhost:5173
+NODE_ENV=Development
+
+cd backend
+npm install
+npm run dev
+
+backend will run on http://localhost:4000
+
+FrontEnd Setup - 
+
+cd frontend
+npm install
+npm run dev
+
+frontend will run on http://localhost:5173
+
+As you will connect your own database you will need to create a new user to use the website. 
+You can test the backend using postman. 
+You won't be able to access the protected routes on frontend without authentication. 
+ 
 To see the live demo visit the hosted website- https://prime-trade-frontend.vercel.app/
